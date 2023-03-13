@@ -14,6 +14,9 @@
         android:theme="@style/Theme.ControleGAMERZ"
         tools:targetApi="31">
         <activity
+            android:name=".DetailledProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListActivity"
             android:exported="false" />
         <activity
