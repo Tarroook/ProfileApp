@@ -18,6 +18,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         listView = findViewById(R.id.profileListView);
         addButton = findViewById(R.id.add_button);
+        loadFromDBToMemory();
 
         addButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -26,5 +27,12 @@ public class ListActivity extends AppCompatActivity {
 
         ProfilAdapter adapter = new ProfilAdapter(getApplicationContext(), Profile.profiles);
         listView.setAdapter(adapter);
+    }
+
+    public void loadFromDBToMemory(){
+        SQLiteManager sqLiteManager = SQLiteManager.getInstance(this);
+        // clear list then populate it
+        Profile.profiles.clear();
+        sqLiteManager.populateList();
     }
 }

@@ -68,14 +68,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveNote() {
+        SQLiteManager sqLiteManager = SQLiteManager.getInstance(this);
         String name = nameEditText.getText().toString();
         String age = ageEditText.getText().toString();
         String address = addressEditText.getText().toString();
         String email = emailEditText.getText().toString();
+        int id = Profile.profiles.size();
 
-        Profile profile = new Profile(name, age, address, email, picture);
-        Profile.profiles.add(profile);
-        clearFields();
+        Profile profile = new Profile(id, name, age, address, email, picture);
+        sqLiteManager.addProfile(profile);
         openList();
     }
 
