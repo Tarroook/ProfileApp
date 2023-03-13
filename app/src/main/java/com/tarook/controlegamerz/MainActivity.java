@@ -9,10 +9,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,20 +45,18 @@ public class MainActivity extends AppCompatActivity {
       }, 100);
         }
 
-        takePictureButton.setOnClickListener(v -> {
-            // opens the camera and takes a picture
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 100);
-        });
+        enableSaveButton();
+        setupListeners();
+    }
 
-        saveButton.setOnClickListener(v -> {
-            // enters the data into the database, the database is just a text file for now
-            saveNote();
-        });
 
-        listButton.setOnClickListener(v -> {
-            openList();
-        });
+
+    private void enableSaveButton() {
+        saveButton.setEnabled(!nameEditText.getText().toString().isEmpty()
+                && !ageEditText.getText().toString().isEmpty()
+                && !addressEditText.getText().toString().isEmpty()
+                && !emailEditText.getText().toString().isEmpty()
+                && picture != null);
     }
 
     @Override
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             assert data != null;
             picture = (Bitmap) data.getExtras().get("data");
             pictureStatusText.setText("Photo prise");
+            enableSaveButton();
         }
     }
 
@@ -77,7 +80,27 @@ public class MainActivity extends AppCompatActivity {
 
         Profile profile = new Profile(id, name, age, address, email, picture);
         sqLiteManager.addProfile(profile);
-        openList();
+
+        // disable all the fields
+        saveButton.setEnabled(false);
+        takePictureButton.setEnabled(false);
+        nameEditText.setEnabled(false);
+        ageEditText.setEnabled(false);
+        addressEditText.setEnabled(false);
+        emailEditText.setEnabled(false);
+
+        // Notify the user
+        Toast.makeText(this, "Profil sauvegardé", Toast.LENGTH_SHORT).show();
+
+        //clearFields();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                openList();
+            }
+        }, 1000);
+
     }
 
     private void clearFields() {
@@ -103,5 +126,96 @@ public class MainActivity extends AppCompatActivity {
     public void openList(){
         Intent intent = new Intent(this, ListActivity.class);
         startActivity(intent);
+    }
+
+    private void setupListeners() {
+        takePictureButton.setOnClickListener(v -> {
+            // opens the camera and takes a picture
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 100);
+        });
+
+        saveButton.setOnClickListener(v -> {
+            // enters the data into the database, the database is just a text file for now
+            saveNote();
+        });
+
+        listButton.setOnClickListener(v -> {
+            openList();
+        });
+
+        // on change of text in all edit texts, enable the save button if all fields are filled
+
+        nameEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableSaveButton();
+            }
+        });
+
+        ageEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableSaveButton();
+            }
+        });
+
+        addressEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableSaveButton();
+            }
+        });
+
+        emailEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                enableSaveButton();
+            }
+        });
     }
 }
