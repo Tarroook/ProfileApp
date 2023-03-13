@@ -9,52 +9,60 @@
 
     <TextView
         android:id="@+id/nom"
-        android:textSize="20sp"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nom"/>
 
     <TextView
         android:id="@+id/adresse"
-        android:textSize="20sp"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.881"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nom" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview"
+        tools:text="Adresse"/>
 
     <TextView
         android:id="@+id/email"
-        android:textSize="20sp"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="96dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adresse" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview"
+        tools:text="email"/>
 
     <TextView
         android:id="@+id/age"
-        android:textSize="20sp"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="40dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview"
+        tools:text="Age"/>
 
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="302dp"
         android:layout_height="313dp"
-        android:layout_marginTop="64dp"
         android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/age" />
+        app:layout_constraintTop_toBottomOf="@+id/nom" />
 </androidx.constraintlayout.widget.ConstraintLayout>
