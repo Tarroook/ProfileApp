@@ -39,6 +39,7 @@ public class ListActivity extends AppCompatActivity {
                 intent.putExtra("adresse", selectedProfile.getAddress());
                 intent.putExtra("email", selectedProfile.getEmail());
                 intent.putExtra("age", selectedProfile.getAge());
+                intent.putExtra("image", selectedProfile.getPicture());
                 startActivity(intent);
             }
         });
